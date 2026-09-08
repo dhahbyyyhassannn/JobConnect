@@ -1,0 +1,46 @@
+.sign-in-link {
+    text-decoration: none;
+    cursor: pointer;
+    color: #091413;
+    font-size: 23px;
+}
+
+.sign-in-container {
+    border-radius: 5px;
+    border: 1px solid #091413;
+    padding: 5px 10px;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.sign-in-container:hover {
+    background-color: #091413;
+    color: #fff;
+}
+
+.sign-in-container:hover .sign-in-link {
+    color: #fff;
+}
+
+.sign-up-container {
+    border-radius: 5px;
+    background-color: #091413;
+    padding: 5px 10px;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out, border 0.5s ease-in-out;
+}
+
+.sign-up-container:hover {
+    background-color: #fff;
+    color: #091413;
+    border: 1px solid #091413;
+}
+
+.sign-up-container:hover .sign-up-link {
+    color: #091413;
+}
+
+.sign-up-link {
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 23px;
+}

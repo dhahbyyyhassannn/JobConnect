@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Senior React Developer",
+    "company": "Tech Solutions Inc",
+    "location": "San Francisco, CA",
+    "salary": "$120,000 - $150,000",
+    "category": "Frontend",
+    "description": "We are looking for an experienced React developer to join our growing team.",
+    "postedDate": "2024-08-28",
+    "tags": ["React", "JavaScript", "CSS", "REST API"]
+  },
+  {
+    "id": 2,
+    "title": "Full Stack Developer",
+    "company": "Digital Innovations",
+    "location": "New York, NY",
+    "salary": "$100,000 - $140,000",
+    "category": "Full Stack",
+    "description": "Build robust full-stack applications using Node.js and React.",
+    "postedDate": "2024-08-27",
+    "tags": ["Node.js", "React", "MongoDB", "AWS"]
+  },
+  {
+    "id": 3,
+    "title": "Backend Engineer",
+    "company": "Cloud Systems",
+    "location": "Austin, TX",
+    "salary": "$110,000 - $145,000",
+    "category": "Backend",
+    "description": "Develop scalable backend services and APIs for our cloud platform.",
+    "postedDate": "2024-08-26",
+    "tags": ["Python", "PostgreSQL", "Docker", "Microservices"]
+  },
+  {
+    "id": 4,
+    "title": "UI/UX Designer",
+    "company": "Creative Agency Co",
+    "location": "Los Angeles, CA",
+    "salary": "$90,000 - $125,000",
+    "category": "Design",
+    "description": "Design beautiful and intuitive user interfaces for web and mobile apps.",
+    "postedDate": "2024-08-25",
+    "tags": ["Figma", "UI Design", "Prototyping", "User Research"]
+  },
+  {
+    "id": 5,
+    "title": "DevOps Engineer",
+    "company": "Infrastructure Pro",
+    "location": "Seattle, WA",
+    "salary": "$115,000 - $155,000",
+    "category": "DevOps",
+    "description": "Manage and optimize our cloud infrastructure and deployment pipelines.",
+    "postedDate": "2024-08-24",
+    "tags": ["Docker", "Kubernetes", "CI/CD", "AWS", "Linux"]
+  },
+  {
+    "id": 6,
+    "title": "Mobile App Developer",
+    "company": "App Creators",
+    "location": "Boston, MA",
+    "salary": "$100,000 - $135,000",
+    "category": "Mobile",
+    "description": "Develop iOS and Android applications for our innovative mobile platform.",
+    "postedDate": "2024-08-23",
+    "tags": ["React Native", "Swift", "Kotlin", "Mobile"]
+  },
+  {
+    "id": 7,
+    "title": "Data Scientist",
+    "company": "Analytics Plus",
+    "location": "Chicago, IL",
+    "salary": "$105,000 - $150,000",
+    "category": "Data Science",
+    "description": "Analyze complex datasets and build predictive models for business insights.",
+    "postedDate": "2024-08-22",
+    "tags": ["Python", "Machine Learning", "SQL", "Pandas", "TensorFlow"]
+  },
+  {
+    "id": 8,
+    "title": "Frontend Engineer",
+    "company": "Web Innovations",
+    "location": "Denver, CO",
+    "salary": "$95,000 - $130,000",
+    "category": "Frontend",
+    "description": "Create responsive and accessible web interfaces using modern technologies.",
+    "postedDate": "2024-08-21",
+    "tags": ["Vue.js", "TypeScript", "CSS", "Webpack"]
+  },
+  {
+    "id": 9,
+    "title": "QA Engineer",
+    "company": "Quality Assurance Ltd",
+    "location": "Miami, FL",
+    "salary": "$80,000 - $115,000",
+    "category": "QA",
+    "description": "Ensure software quality through comprehensive testing and automation.",
+    "postedDate": "2024-08-20",
+    "tags": ["Selenium", "Jest", "Testing", "Automation"]
+  },
+  {
+    "id": 10,
+    "title": "Java Developer",
+    "company": "Enterprise Systems",
+    "location": "Charlotte, NC",
+    "salary": "$100,000 - $140,000",
+    "category": "Backend",
+    "description": "Build enterprise-level applications using Java and Spring Framework.",
+    "postedDate": "2024-08-19",
+    "tags": ["Java", "Spring Boot", "Microservices", "SQL"]
+  },
+  {
+    "id": 11,
+    "title": "GraphQL Developer",
+    "company": "Modern Stack Corp",
+    "location": "Portland, OR",
+    "salary": "$110,000 - $145,000",
+    "category": "Full Stack",
+    "description": "Develop and maintain GraphQL APIs for our next-generation platform.",
+    "postedDate": "2024-08-18",
+    "tags": ["GraphQL", "Node.js", "TypeScript", "Apollo"]
+  },
+  {
+    "id": 12,
+    "title": "Machine Learning Engineer",
+    "company": "AI Ventures",
+    "location": "San Jose, CA",
+    "salary": "$130,000 - $170,000",
+    "category": "Data Science",
+    "description": "Design and implement machine learning models for cutting-edge applications.",
+    "postedDate": "2024-08-17",
+    "tags": ["Python", "TensorFlow", "PyTorch", "Deep Learning"]
+  }
+]

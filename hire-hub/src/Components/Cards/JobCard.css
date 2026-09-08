@@ -1,0 +1,96 @@
+.job-card-container {
+    background-color: white;
+    border: 1px solid #E0E0E0;
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.job-card-container:hover {
+    box-shadow: 0 8px 20px #536B82;
+    transform: translateY(-10px);
+}
+
+.job-card-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.bookmark-icon {
+    color: #536B82;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.bookmark-icon:hover {
+    color: black;
+    background-color: #ECF3F8;
+    border-radius: 6px;
+}
+
+.job-card-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.job-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.job-company {
+    font-size: 14px;
+    color: #536B82;
+}
+
+.job-card-body {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.job-location, .job-salary, .job-type {
+    font-size: 14px;
+    color: #536B82;
+}
+
+.job-tags {
+    display: flex;
+    gap: 25px;
+}
+
+.job-tag {
+    background-color: #ECF3F8;
+    color: #152F4B;
+    width: fit-content;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.job-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.apply-btn {
+    background-color: #ECF3F8;
+    color: #152F4B;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.apply-btn:hover {
+    background-color: #05437A;
+    color: white;
+}

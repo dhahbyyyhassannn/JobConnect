@@ -1,0 +1,7 @@
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: #1D2128;
+}

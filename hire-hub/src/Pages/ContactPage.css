@@ -1,0 +1,126 @@
+.contact-page {
+    color: #102A43;
+}
+
+.contact-page-intro {
+    background: #F5F9FC;
+    padding: 20px 0 20px 100px;
+    margin-top: -15px;
+}
+
+.contact-page-intro h1 {
+    max-width: 790px;
+    margin: 18px 0;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.02;
+}
+
+.contact-page-intro p {
+    max-width: 560px;
+    margin: 0;
+    color: #536B82;
+    font-size: 19px;
+    line-height: 1.55;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 100px;
+    width: min(1100px, 84%);
+    margin: 0 auto;
+    padding: 78px 0 100px;
+}
+
+.contact-copy h2 {
+    margin: 0 0 16px;
+    font-size: 34px;
+}
+
+.contact-copy > p {
+    color: #536B82;
+    line-height: 1.65;
+}
+
+.contact-note {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 42px;
+    border-top: 2px solid #DDE4EC;
+    padding-top: 18px;
+}
+
+.contact-note-mark {
+    color: #008F8C;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.contact-note p {
+    margin: 0;
+    color: #536B82;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.contact-form label {
+    margin-top: 10px;
+    color: #102A43;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #C8D3DE;
+    border-radius: 4px;
+    padding: 13px 14px;
+    color: #102A43;
+    font: inherit;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 2px solid rgba(0, 168, 165, 0.25);
+    border-color: #00A8A5;
+}
+
+.contact-form button {
+    align-self: flex-start;
+    margin-top: 16px;
+    border: 0;
+    border-radius: 4px;
+    background: #05437A;
+    color: white;
+    padding: 13px 22px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background: #032F56;
+}
+
+.contact-success {
+    margin: 8px 0 0;
+    color: #008F8C;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 44px;
+    }
+}

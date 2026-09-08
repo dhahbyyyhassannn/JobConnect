@@ -1,0 +1,35 @@
+.container {
+    padding: 25px;
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid #DDE4EC;
+    flex: 1;
+}
+
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+    font-size: 20px;
+}
+
+.icon-container {
+    background-color: #05437A;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: white;
+}
+
+.number-container {
+    color: #ECF3F8;
+    font-size: 20px;
+}
+
+.etape-container {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.description-container {
+    color: #536B82;
+}

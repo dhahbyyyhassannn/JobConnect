@@ -1,0 +1,10 @@
+.main-page-card-container {
+    color: #00C1BD;
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.phrase {
+    color: black;
+}

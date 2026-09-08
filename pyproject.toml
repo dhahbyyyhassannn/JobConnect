@@ -1,0 +1,31 @@
+[project]
+name = "cv-intelligent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "dhahbyyyhassannn", email = "dhahbyyy.hassannn@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "bcrypt>=4.0",
+    "fastapi[standard]>=0.141.1",
+    "google-auth>=2.57.0",
+    "ollama>=0.6.2",
+    "passlib[bcrypt]>=1.7.4",
+    "psycopg2-binary>=2.9.12",
+    "pydef>=0.0.1",
+    "pypdf>=6.18.0",
+    "python-dotenv>=1.2.2",
+    "python-jose[cryptography]>=3.5.0",
+    "reportlab>=5.0.1",
+    "requests>=2.34.2",
+    "sqlalchemy>=2.0.51",
+]
+
+[project.scripts]
+cv-intelligent = "cv_intelligent:main"
+
+[build-system]
+requires = ["uv_build>=0.12.2,<0.13.0"]
+build-backend = "uv_build"

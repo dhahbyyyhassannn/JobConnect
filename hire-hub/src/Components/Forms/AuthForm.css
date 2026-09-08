@@ -1,0 +1,130 @@
+.auth-form-container {
+    background-color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: auto;
+    margin-top: 50px;
+    width: 60%;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.auth-form-button-container {
+    display: flex;
+    background-color: #ECF3F8;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.continue-with-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.continue-with-container > div {
+  flex: 1;
+}
+
+.continue-with-container hr {
+    width: 100%;
+    border: 0;
+    margin: 0;
+    border-top: 1px solid black;
+}
+
+.auth-form-auth-button {
+    text-align: center;
+    background-color: #05437A;
+    color: white;
+    width: 100%;
+    font-size: 24px;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.text-input-field-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.show-password-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #40515F;
+    cursor: pointer;
+}
+
+.show-password-row input {
+    accent-color: #05437A;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.header-auth-form-container-h2 {
+    font-size: 35px;
+    font-weight: bolder;
+}
+
+.header-auth-form-container-p {
+    color: #5C6B7A;
+    font-size: 15px;
+}
+
+.roles-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.role-container {
+    background-color: #ECF3F8;
+    border: 1px solid #DCE7F1;
+    color: #1F2A37;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 12px;
+    width: 100%;
+    padding: 16px 20px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.role-container.selected {
+    background-color: #EAF8FF;
+    border-color: #7CB9D8;
+    box-shadow: inset 0 0 0 1px rgba(124, 185, 216, 0.25);
+}
+
+.o-auth-2-container {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.o-auth-2-link-container {
+    background-color: #ECF3F8;
+    color: black;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 12px;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+

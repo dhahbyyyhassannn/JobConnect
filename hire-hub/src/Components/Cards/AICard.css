@@ -1,0 +1,11 @@
+.ai-card-container {
+    background-color: #DDF4F2;
+    border: 1px solid #9BE5E3;
+    color: #00353E;
+    display: flex;
+    border-radius: 10px;
+    gap: 10px;
+    align-items: center;
+    width: max-content;
+    padding: 3px;
+}

@@ -1,0 +1,27 @@
+.how-it-works-container {
+    background-color: #F5F8FB;
+    padding: 72px 0 80px;
+    
+}
+
+.header-container {
+    text-align: center;
+    gap: 5px;
+    padding: 0 24px;
+    margin: 0 auto 36px;
+    max-width: 720px;
+}
+
+.card-container {
+    display: flex;
+    width: min(1100px, 84%);
+    gap: 20px;
+    margin: auto;
+}
+
+@media (max-width: 800px) {
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}

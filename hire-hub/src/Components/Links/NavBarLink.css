@@ -1,0 +1,9 @@
+.app-nav-link {
+    text-decoration: none;
+    color: #536B82;
+    font-size: 20px;
+}
+
+.app-nav-link:hover {
+    color: black;
+}

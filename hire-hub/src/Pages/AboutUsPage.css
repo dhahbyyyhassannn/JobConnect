@@ -1,0 +1,99 @@
+.about-us-page-header {
+    background-color: #F5F9FC;
+    padding: 20px 0 20px 100px;
+    margin-top: -15px;
+    padding-bottom: 100px;
+}
+
+.about-us-page-header-text {
+    gap: 35px;
+}
+
+.about-us-page-header-text h2 {
+    max-width: 790px;
+    margin: 18px 0;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.02;
+}
+
+.about-us-page-header-text p {
+    max-width: 590px;
+    margin: 0;
+    font-size: 19px;
+    color: #536B82;
+    line-height: 1.55;
+}
+
+.about-us-page-content {
+    background-color: #FCFEFF;
+    margin-top: -50px;
+}
+
+.about-us-page-content-text {
+    width: min(1100px, 84%);
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.about-us-page-content-text-left-section {
+    width: 40%;
+}
+
+.about-us-page-content-text-left-section h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.about-us-page-content-text-left-section p {
+    font-size: 16px;
+    color: #536B82;
+    line-height: 1.5;
+}
+
+.about-us-page-content-text-right-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    width: 52%;
+}
+
+.about-us-principle {
+    border-top: 2px solid #DDE4EC;
+    padding: 18px 0 8px;
+}
+
+.about-us-principle-icon {
+    color: #00A8A5;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.about-us-principle h3 {
+    margin: 10px 0 8px;
+    font-size: 20px;
+}
+
+.about-us-principle p {
+    margin: 0;
+    color: #536B82;
+    line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+    .about-us-page-content-text {
+        display: block;
+        padding: 40px 0;
+    }
+
+    .about-us-page-content-text-left-section,
+    .about-us-page-content-text-right-section {
+        width: 100%;
+    }
+
+    .about-us-page-content-text-right-section {
+        margin-top: 32px;
+    }
+}

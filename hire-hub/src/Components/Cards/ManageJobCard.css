@@ -1,0 +1,88 @@
+.manage-job-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 22px 24px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDE7F0;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(5, 67, 122, 0.06);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.manage-job-card-container:hover {
+    border-color: #7DC7E7;
+    box-shadow: 0 8px 18px rgba(5, 67, 122, 0.12);
+    transform: translateY(-2px);
+}
+
+.manage-job-card-title-container {
+    min-width: 0;
+    width: 100%;
+}
+
+.manage-job-card-title-container h2 {
+    margin: 0;
+    color: #152F4B;
+    font-size: 18px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.manage-job-card-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+}
+
+.manage-job-card-edit-button .Button {
+    margin: 0;
+    border: 1px solid #B9D3E3;
+    border-radius: 9px;
+    background-color: #ECF3F8;
+    color: #05437A;
+    padding: 9px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.manage-job-card-edit-button .Button:hover {
+    background-color: #05437A;
+    color: #FFFFFF;
+}
+
+.delete-job-button-container {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid #F0B6B6;
+    border-radius: 9px;
+    background-color: #FFF5F5;
+    color: #A32626;
+    padding: 9px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.delete-job-button-container:hover {
+    background-color: #A32626;
+    color: #FFFFFF;
+}
+
+@media (max-width: 640px) {
+    .manage-job-card-container {
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .manage-job-card-buttons-container {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}

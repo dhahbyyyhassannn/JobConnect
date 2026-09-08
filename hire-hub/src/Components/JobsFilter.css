@@ -1,0 +1,136 @@
+.jobs-filter-container {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid #e0e7ff;
+    box-shadow: 0 2px 8px rgba(5, 67, 122, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #05437A;
+    margin: 0;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-box i {
+    position: absolute;
+    left: 12px;
+    color: #00C1BD;
+    font-size: 16px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 12px 10px 36px;
+    border: 1px solid #e0e7ff;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #536B82;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #00C1BD;
+    box-shadow: 0 0 0 3px rgba(0, 193, 189, 0.1);
+    background-color: #f8fffe;
+}
+
+.search-input::placeholder {
+    color: #8fa9bb;
+}
+
+.category-select {
+    padding: 10px 12px;
+    border: 1px solid #e0e7ff;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #536B82;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-select:focus {
+    outline: none;
+    border-color: #00C1BD;
+    box-shadow: 0 0 0 3px rgba(0, 193, 189, 0.1);
+}
+
+.quick-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-tag {
+    background: #f0f9ff;
+    border: 1px solid #d4e6f1;
+    color: #05437A;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.filter-tag i {
+    font-size: 14px;
+}
+
+.filter-tag:hover {
+    background: #00C1BD;
+    border-color: #00C1BD;
+    color: white;
+    transform: translateX(3px);
+}
+
+.clear-filters-btn {
+    background: #f0f9ff;
+    border: 1px solid #d4e6f1;
+    color: #05437A;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.clear-filters-btn:hover {
+    background: #05437A;
+    color: white;
+    border-color: #05437A;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .jobs-filter-container {
+        position: static;
+        margin-bottom: 25px;
+    }
+}

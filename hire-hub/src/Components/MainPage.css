@@ -1,0 +1,23 @@
+.main-page-container {
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    margin-top: 70px;
+}
+
+.image {
+    width: 500px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.paragraphe {
+    color: #536B82;
+    font-size: 20px;
+}
+
+.cards-container {
+    display: flex;
+    gap: 20px;
+}
