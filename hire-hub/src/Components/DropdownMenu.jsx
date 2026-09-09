@@ -49,6 +49,9 @@ export default function DropdownMenu() {
               <li>
                 <MenuLink linkPath={ "/manage-jobs" } bootstrapIcon={ "bi bi-kanban" } linkName={ "manage jobs" } />
               </li>
+              <li>
+                <MenuLink linkPath={"/recruiter-applications"} bootstrapIcon={"bi bi-window"} linkName={"Applications"} />
+              </li>
               </>
             ) : (
               <>
