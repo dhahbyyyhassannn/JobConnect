@@ -1,21 +1,11 @@
-import { useState } from 'react';
 import NavBar from '../Layouts/NavBar';
 import { Search } from 'lucide-react';
 import FindJobs from '../Components/FindJobs';
 import Badge from '../Components/Badge';
 import './FindJobsPage.css';
 
+
 export default function FindJobsPage() {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('');
-
-    const handleSearchChange = (query) => {
-        setSearchQuery(query);
-    };
-
-    const handleCategoryChange = (category) => {
-        setSelectedCategory(category);
-    };
 
     return (
         <div>
@@ -51,10 +41,7 @@ export default function FindJobsPage() {
                             Search
                         </div>
                     </div>
-                    <FindJobs 
-                        searchQuery={searchQuery}
-                        selectedCategory={selectedCategory}
-                    />
+                    <FindJobs />
                 </div>
             </div>
         </div>

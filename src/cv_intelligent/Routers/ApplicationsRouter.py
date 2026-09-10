@@ -7,8 +7,25 @@ from cv_intelligent.models.MatchResult import MatchResult
 from cv_intelligent.security.security import get_current_user
 from ..services.CVParser import extract_cv_text
 from ..services.llm_services import analyze_match_with_llm
-
+from ..schemas.ApplicationsSchema import ApplicationCreate, ApplicationOut
 router = APIRouter(prefix="/applications", tags=["Applications"])
+
+    
+
+@router.post('/applicationCreate', response_model=ApplicationOut)
+def createApplication(
+    application: ApplicationCreate,
+    db: Session = Depends(get_db)):
+    newApplication = Application(
+        user_id= application.user_id,
+        cv_id= application.cv_id,
+        job_offer_id= application.job_offer_id)
+
+    db.add(newApplication)
+    db.refresh()
+    db.commit(newApplication)
+
+
 
 
 @router.get('/user/{user_id}')

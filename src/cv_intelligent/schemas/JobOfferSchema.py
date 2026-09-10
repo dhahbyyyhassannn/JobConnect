@@ -19,7 +19,7 @@ class JobOfferOut(BaseModel):
     job_offer_id: int
     recruiter_id: int
     job_category_id: int
-    jobCategory: str
+    job_category: str
     title: str
     description: str
     requirements: list[JobRequirementOut]

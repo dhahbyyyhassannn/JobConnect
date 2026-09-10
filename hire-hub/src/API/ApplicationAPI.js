@@ -15,3 +15,10 @@ export const getApplicationsByUserId = (user_id) => {
     const response = axios.get(`http://localhost:8000/applications/user/${user_id}`)
     return response;
 }
+
+export const createApplication = (user_id, cv_id, job_offer_id) => {
+    const response = axios.post('http://localhost:8000/applications/applicationCreate',
+        { user_id, cv_id, job_offer_id }
+    )
+    return response;
+}

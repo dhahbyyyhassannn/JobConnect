@@ -94,3 +94,21 @@
     background-color: #05437A;
     color: white;
 }
+
+.apply-btn-disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.application-message {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.application-success {
+    color: #18794e;
+}
+
+.application-error {
+    color: #b42318;
+}

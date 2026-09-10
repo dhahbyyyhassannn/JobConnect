@@ -1,10 +1,24 @@
 import axios from "axios";
 
+export const getAllJobs = async () => {
+    const token = localStorage.getItem('token');
+    try {
+        return axios.get('http://localhost:8000/job/allJobs',
+            { headers: { Authorization: `Bearer ${token}` }
+        })
+    }
+    catch(err) {
+        console.error('error', err)
+    }
+}
+
 
 export const getJobById = async (job_offer_id) => {
+    const token = localStorage.getItem('token');
     try {
         return axios.get('http://localhost:8000/job/getJobById', {
-            params: { job_offer_id }
+            params: { job_offer_id },
+            headers: { Authorization: `Bearer ${token}` }
     })
     }
     catch(err) {

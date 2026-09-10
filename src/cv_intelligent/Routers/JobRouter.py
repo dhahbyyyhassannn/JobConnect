@@ -108,3 +108,11 @@ def deleteJobById(
         raise HTTPException(status_code=400, detail='job not found')
     db.delete(job)
     db.commit()
+
+
+@router.get('/allJobs', response_model=list[schemas.JobOfferOut])
+def getAllJobs(
+    db: Session = Depends(get_db)
+):
+    jobs = db.query(JobOffer).all()
+    return jobs

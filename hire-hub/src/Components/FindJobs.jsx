@@ -1,28 +1,24 @@
 import JobCard from './Cards/JobCard';
-import { useState } from 'react';
-import jobsData from '../Data/jobs.json';
+import { useState, useEffect } from 'react';
 import './FindJobs.css';
+import { getAllJobs } from '../API/JobAPI';
 
-export default function FindJobs({ searchQuery, selectedCategory }) {
-    const [jobs, setJobs] = useState(jobsData);
 
-    const filteredJobs = jobs.filter(job => {
-        const matchesSearch = 
-            job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            job.location.toLowerCase().includes(searchQuery.toLowerCase());
-        
-        const matchesCategory = !selectedCategory || job.category === selectedCategory;
-        
-        return matchesSearch && matchesCategory;
-    });
+export default function FindJobs() {
+    const [jobs, setJobs] = useState([]);
+
+    useEffect(() => {
+        getAllJobs()
+        .then(res => setJobs(res?.data))
+        .catch(err => console.error('error', err))
+    }, [])
 
     return (
         <div className="find-jobs-container">
             <div className="jobs-grid">
-                {filteredJobs.length > 0 ? (
-                    filteredJobs.map(job => (
-                        <JobCard key={job.id} job={job} />
+                {jobs.length > 0 ? (
+                    jobs.map(job => (
+                        <JobCard key={job.job_offer_id} job={job} />
                     ))
                 ) : (
                     <div className="no-jobs">
