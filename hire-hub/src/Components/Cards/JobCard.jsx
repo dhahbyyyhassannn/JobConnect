@@ -14,10 +14,11 @@ export default function JobCard({ job }) {
     const [applicationMessage, setApplicationMessage] = useState('')
     const [isApplying, setIsApplying] = useState(false)
     const [cv, setCv] = useState(null)
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 
     useEffect(() => {
         if (!user?.user_id) return;
-        
+
         getCvByUserId(user.user_id)
         .then(res => setCv(res?.data))
         .catch(err => console.error('error: ', err))
@@ -40,15 +41,18 @@ export default function JobCard({ job }) {
 
     const handleApply = async () => {
         setApplicationMessage('')
+        console.log('DEBUG user:', user);
+        console.log('DEBUG cv:', cv);
+        console.log('DEBUG job:', job);
 
-        if (!user?.user_id || !cv?.cv_id || !job?.job_offer_id) {
+        if (!user?.user_id || !cv?.cv_id || !job?.job_offer_id || !job?.recruiter_id) {
             setApplicationMessage('Unable to apply. Your profile or CV is missing.')
             return
         }
 
         setIsApplying(true)
         try {
-            await createApplication(user.user_id, cv.cv_id, job.job_offer_id)
+            await createApplication(user.user_id, cv.cv_id, job.job_offer_id, job.recruiter_id)
             setApplicationMessage('Application sent successfully.')
         } catch (err) {
             console.error('Failed to apply:', err)
@@ -57,6 +61,11 @@ export default function JobCard({ job }) {
             setIsApplying(false)
         }
     };
+
+    const category = job.job_category || job.category
+    const hasCompleteInformation = Boolean(
+        job.title && job.description && job.location && category && requirements.length > 0
+    )
 
     return (
         <>
@@ -74,6 +83,11 @@ export default function JobCard({ job }) {
                     <MapPin className="map-pin-icon" />
                     <span className="job-location">{job.location || 'Location not specified'}</span>
                 </div>
+                {!hasCompleteInformation && (
+                    <button type="button" className="job-card-more-button" onClick={() => setIsDetailsOpen(true)}>
+                        See more
+                    </button>
+                )}
                 <div className="job-tags">
                     {requirements.map((requirement, idx) => (
                         <div key={requirement.job_requirement_id ?? idx} className="job-tag">
@@ -101,6 +115,38 @@ export default function JobCard({ job }) {
                     </div>
                 )}
             </div>
+            {isDetailsOpen && (
+                <div className="job-dialog-backdrop" role="presentation" onClick={() => setIsDetailsOpen(false)}>
+                    <div className="job-details-dialog" role="dialog" aria-modal="true" aria-labelledby="job-details-title" onClick={(event) => event.stopPropagation()}>
+                        <div className="job-dialog-header">
+                            <div>
+                                <p className="job-dialog-eyebrow">Job details</p>
+                                <h2 id="job-details-title">{job.title || 'Untitled job'}</h2>
+                            </div>
+                            <button type="button" className="job-dialog-close" onClick={() => setIsDetailsOpen(false)} aria-label="Close job details">
+                                &times;
+                            </button>
+                        </div>
+                        <div className="job-dialog-content">
+                            <p><strong>Category:</strong> {category || 'Not specified'}</p>
+                            <p><strong>Location:</strong> {job.location || 'Not specified'}</p>
+                            <p><strong>Description:</strong> {job.description || 'No description provided.'}</p>
+                            <div>
+                                <strong>Requirements:</strong>
+                                {requirements.length > 0 ? (
+                                    <ul>
+                                        {requirements.map((requirement, idx) => (
+                                            <li key={requirement.job_requirement_id ?? idx}>
+                                                {typeof requirement === 'string' ? requirement : requirement.requirement}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : <p>No requirements provided.</p>}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     )
 }

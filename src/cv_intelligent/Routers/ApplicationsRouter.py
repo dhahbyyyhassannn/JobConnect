@@ -19,11 +19,14 @@ def createApplication(
     newApplication = Application(
         user_id= application.user_id,
         cv_id= application.cv_id,
-        job_offer_id= application.job_offer_id)
+        job_offer_id= application.job_offer_id,
+        recruiter_id=application.recruiter_id)
+        
 
     db.add(newApplication)
-    db.refresh()
-    db.commit(newApplication)
+    db.commit()
+    db.refresh(newApplication)
+    return newApplication
 
 
 

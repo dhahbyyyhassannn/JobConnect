@@ -1,9 +1,12 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from .security.security import add_cors
 from .database import engine, Base
 from . import models 
-from .Routers import AuthRouter,BookmarksRouter,CategoriesRouter,JobRouter,RequirementRouter,UserRouter, ApplicationsRouter
+from .Routers import AuthRouter,BookmarksRouter,CategoriesRouter,JobRouter,RequirementRouter,UserRouter, ApplicationsRouter, CVRouter
 from .FakeData.fake.FakeData import seed
 
 @asynccontextmanager
@@ -24,3 +27,4 @@ app.include_router(UserRouter.router)
 app.include_router(JobRouter.router)
 app.include_router(RequirementRouter.router)
 app.include_router(ApplicationsRouter.router)
+app.include_router(CVRouter.router)

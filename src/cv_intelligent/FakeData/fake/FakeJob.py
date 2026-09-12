@@ -1,4 +1,4 @@
-"""Job-offer fixtures owned by the fake recruiter."""
+"""Job-offer templates copied for every fake recruiter."""
 
 FAKE_JOBS = (
     {

@@ -112,3 +112,79 @@
 .application-error {
     color: #b42318;
 }
+
+.job-card-more-button {
+    border: 0;
+    background: transparent;
+    color: #05437A;
+    padding: 0;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.job-dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(21, 47, 75, 0.45);
+}
+
+.job-details-dialog {
+    width: min(100%, 620px);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 26px;
+    border-radius: 16px;
+    background: #FFFFFF;
+    box-shadow: 0 20px 60px rgba(21, 47, 75, 0.25);
+}
+
+.job-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.job-dialog-eyebrow {
+    margin: 0 0 6px;
+    color: #087F87;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.job-dialog-header h2 {
+    margin: 0;
+    color: #152F4B;
+}
+
+.job-dialog-close {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 8px;
+    background: #ECF3F8;
+    color: #152F4B;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.job-dialog-content {
+    margin-top: 24px;
+    color: #536B82;
+    line-height: 1.6;
+}
+
+.job-dialog-content p {
+    margin: 0 0 14px;
+}
+
+.job-dialog-content ul {
+    margin: 8px 0 0;
+    padding-left: 22px;
+}

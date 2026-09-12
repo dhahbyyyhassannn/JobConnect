@@ -4,7 +4,8 @@ import Badge from '../Components/Badge'
 import { getCurrentUser } from "../API/AuthAPI"
 import { getApplicationsByUserId } from '../API/ApplicationAPI'
 import { ApplicationReview } from '../API/ApplicationAPI'
-import { getJobById } from '../API/JobAPI'
+import { getJobById, getJobsById } from '../API/JobAPI'
+import JobApplicationsDialog from '../Components/Dialog/JobApplicationsDialog'
 import './ApplicationsPage.css'
 
 export default function ApplicationsPage() {
@@ -18,8 +19,19 @@ export default function ApplicationsPage() {
     }, [])
 
     const [applications, setApplications] = useState([]);
+    const [recruiterJobs, setRecruiterJobs] = useState([]);
+    const [selectedJob, setSelectedJob] = useState(null);
+
     useEffect(() => {
-        if (!user?.user_id) return;
+        if (user?.role !== 'recruiter' || !user?.user_id) return;
+
+        getJobsById(user.user_id)
+            .then(res => setRecruiterJobs(res?.data || []))
+            .catch(err => console.error(err));
+    }, [user?.role, user?.user_id])
+
+    useEffect(() => {
+        if (!user?.user_id || user?.role === 'recruiter') return;
 
         getApplicationsByUserId(user?.user_id)
         .then(res => setApplications(res?.data || []))
@@ -67,20 +79,44 @@ export default function ApplicationsPage() {
             <NavBar />
             <div className="application-page-container">
                 <div className="application-page-header">
-                    <Badge>MY APPLICATIONS</Badge>
+                    <Badge>{user?.role === 'recruiter' ? 'RECRUITER APPLICATIONS' : 'MY APPLICATIONS'}</Badge>
                     <div className="application-page-header-text">
                         <h2>
                             Welcome {user?.username}!
                         </h2>
                         <p>
-                            Review every application you submitted, keep track of roles you are interested in,
-                            and discover the AI opinion about each candidacy.
+                            {user?.role === 'recruiter'
+                                ? 'Open a job to see its applicants and analyze each CV individually.'
+                                : 'Review every application you submitted, keep track of roles you are interested in, and discover the AI opinion about each candidacy.'}
                         </p>
                     </div>
                 </div>
 
                 <div className="application-page-body">
-                    {applications.length === 0 ? (
+                    {user?.role === 'recruiter' ? (
+                        recruiterJobs.length === 0 ? (
+                            <div className="application-page-empty-state">You have not created any job offers yet.</div>
+                        ) : (
+                            recruiterJobs.map(job => (
+                                <div className="application-page-job-card" key={job.job_offer_id}>
+                                    <div className="application-page-job-card-top">
+                                        <div>
+                                            <p className="application-page-job-label">Recruiter job</p>
+                                            <h3>{job.title}</h3>
+                                        </div>
+                                        <span className="application-page-status">Applications</span>
+                                    </div>
+                                    <div className="application-page-job-meta">
+                                        <span>{job.job_category || 'Category not specified'}</span>
+                                        <span>{job.location || 'Location not specified'}</span>
+                                    </div>
+                                    <button type="button" className="application-page-review-btn" onClick={() => setSelectedJob(job)}>
+                                        See statistics
+                                    </button>
+                                </div>
+                            ))
+                        )
+                    ) : applications.length === 0 ? (
                         <div className="application-page-empty-state">
                             You do not have any applications yet. Start exploring jobs and apply to your next opportunity.
                         </div>
@@ -144,6 +180,7 @@ export default function ApplicationsPage() {
                     )}
                 </div>
             </div>
+            {selectedJob && <JobApplicationsDialog job={selectedJob} onClose={() => setSelectedJob(null)} />}
         </>
     )
 }

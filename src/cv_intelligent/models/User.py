@@ -36,7 +36,11 @@ class User(Base):
         "CV", back_populates="user", cascade="all, delete-orphan", passive_deletes=True
     )
     applications: Mapped[list["Application"]] = relationship(
-        "Application", back_populates="user", cascade="all, delete-orphan", passive_deletes=True
+        "Application",
+        foreign_keys="[Application.user_id]",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True
     )
     job_offers: Mapped[list["JobOffer"]] = relationship(
         "JobOffer", back_populates="recruiter", passive_deletes=True

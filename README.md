@@ -88,13 +88,14 @@ npm run build
 
 ## Development Seed Users
 
-The fake-data seed creates these development accounts:
+The fake-data seed creates 1 admin, 5 recruiters, 8 users, 25 job offers
+(5 per recruiter), and 3 applications per job:
 
 | Role | Email | Password |
 | --- | --- | --- |
 | Admin | `admin@fake.cv-intelligent.local` | `Admin123!` |
-| Recruiter | `recruiter@fake.cv-intelligent.local` | `Recruiter123!` |
-| User | `user@fake.cv-intelligent.local` | `User123!` |
+| Recruiters | `*@fake.cv-intelligent.local` | `Recruiter123!` |
+| Users | `*@fake.cv-intelligent.local` | `User123!` |
 
 Change or remove these credentials before using the project outside local development.
 

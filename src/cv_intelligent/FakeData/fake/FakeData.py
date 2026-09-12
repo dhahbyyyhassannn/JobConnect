@@ -4,15 +4,23 @@ Run with: ``uv run python -m fake.FakeData``
 """
 
 from datetime import datetime
+from io import BytesIO
 
 from cv_intelligent.database import Base, SessionLocal, engine
-from cv_intelligent.models import Application, CV, JobCategory, JobOffer, JobRequirement, User
+from cv_intelligent.models import (
+    Application,
+    CV,
+    JobCategory,
+    JobOffer,
+    JobRequirement,
+    User,
+    UserRole,
+)
 from cv_intelligent.security.security import hash_password
 
 from .FakeJob import FAKE_JOBS
 from .FakeUser import FAKE_USERS
 
-from io import BytesIO
 from reportlab.pdfgen import canvas
 
 def make_fake_pdf_bytes(text: str) -> bytes:
@@ -24,7 +32,7 @@ def make_fake_pdf_bytes(text: str) -> bytes:
     return buffer.getvalue()
 
 def seed() -> None:
-    """Create baseline users and recruiter-owned job offers."""
+    """Create one admin, five recruiters, eight users, and their activity."""
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
     try:
@@ -42,98 +50,106 @@ def seed() -> None:
                 db.flush()
             users[user_data["email"]] = user
 
-        recruiter = users["recruiter@fake.cv-intelligent.local"]
-        candidate = users["user@fake.cv-intelligent.local"]
-        jobs: list[JobOffer] = []
-        for fake_job in FAKE_JOBS:
-            category = db.query(JobCategory).filter_by(
-                category_name=fake_job["category"]
-            ).first()
-            if category is None:
-                category = JobCategory(category_name=fake_job["category"])
-                db.add(category)
-                db.flush()
+        recruiters = [
+            users[user_data["email"]]
+            for user_data in FAKE_USERS
+            if user_data["role"] == UserRole.RECRUITER
+        ]
+        candidates = [
+            users[user_data["email"]]
+            for user_data in FAKE_USERS
+            if user_data["role"] == UserRole.USER
+        ]
 
-            job = db.query(JobOffer).filter_by(
-                recruiter_id=recruiter.user_id, title=fake_job["title"]
-            ).first()
-            if job is None:
-                job = JobOffer(
+        for recruiter in recruiters:
+            for job in db.query(JobOffer).filter_by(
+                recruiter_id=recruiter.user_id
+            ).all():
+                db.delete(job)
+        db.flush()
+
+        candidate_cvs: dict[int, CV] = {}
+        for candidate in candidates:
+            cv = db.query(CV).filter_by(user_id=candidate.user_id).first()
+            if cv is None:
+                cv = CV(
+                    user_id=candidate.user_id,
+                    file_name=f"{candidate.username.lower().replace(' ', '-')}-cv.pdf",
+                    data=make_fake_pdf_bytes(
+                        f"{candidate.username}\nSoftware professional with experience "
+                        "in Python, web development, and collaborative teams."
+                    ),
+                )
+                db.add(cv)
+                db.flush()
+            candidate_cvs[candidate.user_id] = cv
+
+        for recruiter_index, recruiter in enumerate(recruiters, start=1):
+            for job_index, fake_job in enumerate(FAKE_JOBS, start=1):
+                category = db.query(JobCategory).filter_by(
+                    category_name=fake_job["category"]
+                ).first()
+                if category is None:
+                    category = JobCategory(category_name=fake_job["category"])
+                    db.add(category)
+                    db.flush()
+
+                job_title = f"{fake_job['title']} - Team {recruiter_index}.{job_index}"
+                job = db.query(JobOffer).filter_by(
                     recruiter_id=recruiter.user_id,
-                    job_category_id=category.job_category_id,
-                    job_category=fake_job["category"],
-                    title=fake_job["title"],
-                    description=fake_job["description"],
-                    location=fake_job["location"],
-                    created_at=datetime.utcnow(),
-                )
-                db.add(job)
-                db.flush()
-                db.add_all(
-                    JobRequirement(job_offer_id=job.job_offer_id, requirement=requirement)
-                    for requirement in fake_job["requirements"]
-                )
-            jobs.append(job)
+                    title=job_title,
+                ).first()
+                if job is None:
+                    job = JobOffer(
+                        recruiter_id=recruiter.user_id,
+                        job_category_id=category.job_category_id,
+                        job_category=fake_job["category"],
+                        title=job_title,
+                        description=(
+                            f"{fake_job['description']} This is opening {job_index} "
+                            f"for recruiter team {recruiter_index}."
+                        ),
+                        location=fake_job["location"],
+                        created_at=datetime.utcnow(),
+                    )
+                    db.add(job)
+                    db.flush()
+                    db.add_all(
+                        JobRequirement(
+                            job_offer_id=job.job_offer_id,
+                            requirement=requirement,
+                        )
+                        for requirement in fake_job["requirements"]
+                    )
 
-        cv = db.query(CV).filter_by(
-            user_id=candidate.user_id, file_name="sara-user-cv.pdf"
-        ).first()
-        if cv is None:
-            cv = CV(
-                user_id=candidate.user_id,
-                file_name="sara-user-cv.pdf",
-                data=(
-                    b"Sara User\nPython developer with experience in FastAPI, React, "
-                    b"SQL, and data analysis."
-                ),
-            )
-            db.add(cv)
-            db.flush()
+                selected_candidates = [
+                    candidates[(job.job_offer_id + offset) % len(candidates)]
+                    for offset in range(3)
+                ]
+                selected_ids = {candidate.user_id for candidate in selected_candidates}
+                for application in db.query(Application).filter_by(
+                    job_offer_id=job.job_offer_id
+                ).all():
+                    if application.user_id not in selected_ids:
+                        db.delete(application)
 
-        for job in jobs:
-            application = db.query(Application).filter_by(
-                user_id=candidate.user_id,
-                cv_id=cv.cv_id,
-                job_offer_id=job.job_offer_id,
-            ).first()
-            if application is None:
-                db.add(
-                    Application(
+                for candidate in selected_candidates:
+                    application = db.query(Application).filter_by(
                         user_id=candidate.user_id,
-                        cv_id=cv.cv_id,
                         job_offer_id=job.job_offer_id,
-                    )
-                )
-
-        recruiter_cv = db.query(CV).filter_by(
-            user_id=recruiter.user_id, file_name="rami-recruiter-cv.pdf"
-        ).first()
-        if recruiter_cv is None:
-            recruiter_cv = CV(
-                user_id=recruiter.user_id,
-                file_name="rami-recruiter-cv.pdf",
-                data=make_fake_pdf_bytes(
-                    "Rami Recruiter\nRecruiting specialist with experience in "
-                    "technical hiring, Python, and product teams."
-                ),
-            )
-            db.add(recruiter_cv)
-            db.flush()
-
-        for job in jobs:
-            application = db.query(Application).filter_by(
-                user_id=recruiter.user_id,
-                cv_id=recruiter_cv.cv_id,
-                job_offer_id=job.job_offer_id,
-            ).first()
-            if application is None:
-                db.add(
-                    Application(
-                        user_id=recruiter.user_id,
-                        cv_id=recruiter_cv.cv_id,
-                        job_offer_id=job.job_offer_id,
-                    )
-                )
+                    ).first()
+                    if application is None:
+                        db.add(
+                            Application(
+                                user_id=candidate.user_id,
+                                cv_id=candidate_cvs[candidate.user_id].cv_id,
+                                job_offer_id=job.job_offer_id,
+                                recruiter_id=recruiter.user_id,
+                            )
+                        )
+                    else:
+                        application.cv_id = candidate_cvs[candidate.user_id].cv_id
+                        application.recruiter_id = recruiter.user_id
 
         db.commit()
     except Exception:

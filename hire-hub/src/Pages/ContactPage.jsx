@@ -1,14 +1,31 @@
 import { useState } from 'react';
 import NavBar from '../Layouts/NavBar';
 import Badge from '../Components/Badge';
+import TextInputField from '../Components/Inputs/TextInputField';
+import { Mail, User } from 'lucide-react';
 import './ContactPage.css';
 
 export default function ContactPage() {
-    const [submitted, setSubmitted] = useState(false);
+    const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    const handleChange = (field) => (event) => {
+        setForm(previousForm => ({ ...previousForm, [field]: event.target.value }));
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setSubmitted(true);
+        setError('');
+        setSuccess('');
+
+        if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+            setError('Please fill in all fields before sending your message.');
+            return;
+        }
+
+        setSuccess('Thanks. Your message has been sent.');
+        setForm({ name: '', email: '', message: '' });
     };
 
     return (
@@ -31,18 +48,42 @@ export default function ContactPage() {
                         </p>
                         <div className="contact-note">
                             <span className="contact-note-mark">01</span>
-                            <p>This form is currently a local, no-API contact placeholder.</p>
+                            <p>We will use your message to improve the JobConnect experience.</p>
                         </div>
                     </div>
                     <form className="contact-form" onSubmit={handleSubmit}>
-                        <label htmlFor="contact-name">Your name</label>
-                        <input id="contact-name" name="name" type="text" required />
-                        <label htmlFor="contact-email">Email address</label>
-                        <input id="contact-email" name="email" type="email" required />
-                        <label htmlFor="contact-message">Message</label>
-                        <textarea id="contact-message" name="message" rows="6" required />
-                        <button type="submit">Send message</button>
-                        {submitted && <p className="contact-success" role="status">Thanks. Your message is ready to be connected to a contact service later.</p>}
+                        <div className="text-input-field-container">
+                            <TextInputField
+                                icon={<User />}
+                                label="Your name"
+                                name="name"
+                                placeholder="Your full name"
+                                value={form.name}
+                                onChange={handleChange('name')}
+                            />
+                            <TextInputField
+                                icon={<Mail />}
+                                label="Email address"
+                                name="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                value={form.email}
+                                onChange={handleChange('email')}
+                            />
+                            <label className="text-input-label" htmlFor="contact-message">Your message</label>
+                            <textarea
+                                id="contact-message"
+                                name="message"
+                                className="contact-message-input"
+                                placeholder="How can we help?"
+                                rows="6"
+                                value={form.message}
+                                onChange={handleChange('message')}
+                            />
+                        </div>
+                        {error && <p className="contact-error" role="alert">{error}</p>}
+                        {success && <p className="contact-success" role="status">{success}</p>}
+                        <button type="submit" className="auth-form-auth-button">Send message</button>
                     </form>
                 </section>
             </main>
