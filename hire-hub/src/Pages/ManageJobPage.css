@@ -15,16 +15,15 @@
 }
 
 .manage-jobs-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 18px;
-    width: min(90%, 1100px);
+    width: min(90%, 900px);
     margin: 0 auto;
     padding: 32px 0 48px;
 }
 
 .manage-jobs-empty {
-    grid-column: 1 / -1;
     padding: 40px;
     border: 1px dashed #B9D3E3;
     border-radius: 14px;
@@ -48,6 +47,5 @@
 
     .manage-jobs-list {
         width: calc(100% - 40px);
-        grid-template-columns: 1fr;
     }
 }

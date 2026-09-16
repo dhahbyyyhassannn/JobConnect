@@ -1,0 +1,197 @@
+.applicants-dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(21, 47, 75, 0.48);
+}
+
+.applicants-dialog {
+    width: min(100%, 720px);
+    max-height: 85vh;
+    overflow-y: auto;
+    margin: auto;
+    padding: 28px;
+    border: 1px solid #DDE7F0;
+    border-radius: 18px;
+    background: #FFFFFF;
+    box-shadow: 0 24px 70px rgba(21, 47, 75, 0.26);
+}
+
+.applicants-dialog::backdrop {
+    background: transparent;
+}
+
+.applicants-dialog-header,
+.applicant-cv-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #DDE7F0;
+}
+
+.applicants-dialog-header h2,
+.applicant-cv-header h2 {
+    margin: 0;
+    color: #152F4B;
+    font-size: 27px;
+    line-height: 1.2;
+}
+
+.applicant-label {
+    margin: 0 0 7px;
+    color: #087F87;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.applicant-dialog-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border: 1px solid #B9D3E3;
+    border-radius: 9px;
+    background: #ECF3F8;
+    color: #152F4B;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.applicant-dialog-close:hover {
+    background: #05437A;
+    color: #FFFFFF;
+}
+
+.applicants-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.applicant-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px;
+    border: 1px solid #DDE7F0;
+    border-radius: 12px;
+    background: #FDFEFF;
+}
+
+.applicant-info h3 {
+    margin: 0;
+    color: #152F4B;
+    font-size: 17px;
+}
+
+.applicant-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.applicant-primary-button,
+.applicant-secondary-button {
+    border-radius: 8px;
+    padding: 10px 13px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.applicant-primary-button {
+    border: 1px solid #05437A;
+    background: #05437A;
+    color: #FFFFFF;
+}
+
+.applicant-primary-button:hover {
+    background: #032F56;
+    transform: translateY(-1px);
+}
+
+.applicant-secondary-button {
+    border: 1px solid #B9D3E3;
+    background: #ECF3F8;
+    color: #05437A;
+}
+
+.applicant-secondary-button:hover {
+    border-color: #05437A;
+    background: #FFFFFF;
+    transform: translateY(-1px);
+}
+
+.applicant-dialog-state {
+    margin: 24px 0 0;
+    color: #536B82;
+    line-height: 1.5;
+}
+
+.applicant-dialog-error {
+    margin: 24px 0 0;
+    color: #B42318;
+    line-height: 1.5;
+}
+
+.applicant-cv-dialog {
+    width: min(92vw, 900px);
+    height: min(90vh, 900px);
+    padding: 28px;
+    border: 1px solid #DDE7F0;
+    border-radius: 18px;
+    background: #FFFFFF;
+    box-shadow: 0 24px 70px rgba(21, 47, 75, 0.3);
+}
+
+.applicant-cv-dialog::backdrop {
+    background: rgba(21, 47, 75, 0.55);
+}
+
+.applicant-cv-dialog .cv-pdf {
+    width: 100%;
+    height: calc(100% - 76px);
+    margin-top: 20px;
+    border: 1px solid #DDE7F0;
+    border-radius: 9px;
+}
+
+@media (max-width: 640px) {
+    .applicants-dialog {
+        padding: 22px 18px;
+    }
+
+    .applicant-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .applicant-actions {
+        justify-content: stretch;
+    }
+
+    .applicant-primary-button,
+    .applicant-secondary-button {
+        flex: 1;
+    }
+
+    .applicant-cv-dialog {
+        width: 94vw;
+        height: 88vh;
+        padding: 18px;
+    }
+}

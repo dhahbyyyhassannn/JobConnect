@@ -1,27 +1,78 @@
+.job-dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(21, 47, 75, 0.48);
+}
+
 .job-applications-dialog {
     width: min(100%, 760px);
     max-height: 85vh;
     overflow-y: auto;
-    padding: 26px;
-    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid #DDE7F0;
+    border-radius: 18px;
     background: #FFFFFF;
-    box-shadow: 0 20px 60px rgba(21, 47, 75, 0.25);
+    box-shadow: 0 24px 70px rgba(21, 47, 75, 0.26);
+}
+
+.job-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.job-dialog-eyebrow {
+    margin: 0 0 7px;
+    color: #087F87;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.job-dialog-header h2 {
+    margin: 0;
+    color: #152F4B;
+    font-size: 28px;
+}
+
+.job-dialog-close {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #B9D3E3;
+    border-radius: 9px;
+    background: #ECF3F8;
+    color: #152F4B;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.job-dialog-close:hover {
+    background: #05437A;
+    color: #FFFFFF;
 }
 
 .job-applications-list {
     display: grid;
     gap: 14px;
-    margin-top: 24px;
+    margin-top: 26px;
 }
 
 .job-applicant-row {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 12px 20px;
+    gap: 14px 20px;
     align-items: start;
     padding: 18px;
     border: 1px solid #DDE7F0;
     border-radius: 12px;
+    background: #FDFEFF;
 }
 
 .job-applicant-row h3 {
@@ -30,38 +81,44 @@
     font-size: 17px;
 }
 
-.job-applicant-row p {
-    margin: 5px 0 0;
+.job-applicant-row p,
+.job-applications-state,
+.job-applications-error {
     color: #536B82;
     font-size: 14px;
     line-height: 1.5;
 }
 
+.job-applicant-row p {
+    margin: 5px 0 0;
+}
+
 .job-statistics-button {
-    border: 1px solid #B9D3E3;
+    border: 1px solid #05437A;
     border-radius: 8px;
-    padding: 9px 14px;
-    background: #ECF3F8;
-    color: #05437A;
+    padding: 10px 14px;
+    background: #05437A;
+    color: #FFFFFF;
     cursor: pointer;
+    font-size: 13px;
     font-weight: 700;
 }
 
 .job-statistics-button:hover {
-    background: #05437A;
-    color: #FFFFFF;
+    background: #032F56;
 }
 
 .job-statistics-button:disabled {
     cursor: wait;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 .job-applicant-analysis {
     grid-column: 1 / -1;
-    padding-top: 12px;
+    padding-top: 13px;
     border-top: 1px solid #DDE7F0;
     color: #536B82;
+    font-size: 14px;
     line-height: 1.5;
 }
 
@@ -72,7 +129,6 @@
 .job-applications-state,
 .job-applications-error {
     margin: 24px 0 0;
-    color: #536B82;
 }
 
 .job-applications-error {
@@ -80,6 +136,10 @@
 }
 
 @media (max-width: 600px) {
+    .job-applications-dialog {
+        padding: 22px 18px;
+    }
+
     .job-applicant-row {
         grid-template-columns: 1fr;
     }

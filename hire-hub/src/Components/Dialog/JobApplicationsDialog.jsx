@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ApplicationReview, getApplicationsByJobId } from '../../API/ApplicationAPI';
+import { ApplicationReview, getApplicationsByRecruiterId } from '../../API/ApplicationAPI';
 import './JobApplicationsDialog.css';
 
 function getApplications(response) {
@@ -26,9 +26,13 @@ export default function JobApplicationsDialog({ job, onClose }) {
     useEffect(() => {
         let isCurrent = true;
 
-        getApplicationsByJobId(job.job_offer_id)
+        getApplicationsByRecruiterId(job.recruiter_id)
             .then(response => {
-                if (isCurrent) setApplications(getApplications(response));
+                const recruiterApplications = getApplications(response);
+                const jobApplications = recruiterApplications.filter(application => (
+                    application.job_offer_id === job.job_offer_id
+                ));
+                if (isCurrent) setApplications(jobApplications);
             })
             .catch(error => {
                 console.error('Failed to load applications:', error);
@@ -38,10 +42,8 @@ export default function JobApplicationsDialog({ job, onClose }) {
                 if (isCurrent) setIsLoading(false);
             });
 
-        return () => {
-            isCurrent = false;
-        };
-    }, [job.job_offer_id]);
+        return () => { isCurrent = false; };
+    }, [job.job_offer_id, job.recruiter_id]);
 
     const handleAnalyze = async (application) => {
         const applicationId = application.application_id || application.id;
@@ -70,9 +72,7 @@ export default function JobApplicationsDialog({ job, onClose }) {
                         <p className="job-dialog-eyebrow">Recruiter statistics</p>
                         <h2 id="job-applications-title">{job.title}</h2>
                     </div>
-                    <button type="button" className="job-dialog-close" onClick={onClose} aria-label="Close applications dialog">
-                        &times;
-                    </button>
+                    <button type="button" className="job-dialog-close" onClick={onClose} aria-label="Close applications dialog">&times;</button>
                 </div>
 
                 {isLoading && <p className="job-applications-state">Loading applicants...</p>}
@@ -94,12 +94,7 @@ export default function JobApplicationsDialog({ job, onClose }) {
                                         <h3>{getApplicantName(application)}</h3>
                                         <p>Application #{application.application_id || application.id || index + 1}</p>
                                     </div>
-                                    <button
-                                        type="button"
-                                        className="job-statistics-button"
-                                        onClick={() => handleAnalyze(application)}
-                                        disabled={isAnalyzing}
-                                    >
+                                    <button type="button" className="job-statistics-button" onClick={() => handleAnalyze(application)} disabled={isAnalyzing}>
                                         {isAnalyzing ? 'Analyzing CV...' : 'Analyze CV'}
                                     </button>
                                     {analysis && (

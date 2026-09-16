@@ -30,3 +30,14 @@ def become_recruiter(
     db.commit()
     db.refresh(current_user)
     return current_user
+
+
+@router.get('/getUserById', response_model=schemas.UserOut)
+def getUserById(
+    user_id: int,
+    db: Session = Depends(get_db)
+):
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user

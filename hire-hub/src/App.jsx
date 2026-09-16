@@ -9,7 +9,8 @@ import AboutUsPage from './Pages/AboutUsPage';
 import ManageJobsPage from './Pages/ManageJobsPage';
 import HowItWorksPage from './Pages/HowItWorksPage';
 import ContactPage from './Pages/ContactPage';
-import ApplicationsPage from './Pages/ApplicationsPage';
+import ApplicationPage from './Pages/ApplicationPage';
+import RecruiterDashboardPage from './Pages/RecruiterDashboardPage';
 import './App.css'
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
       <Route path="/how-it-works" element={ <HowItWorksPage /> } />
       <Route path="/contact" element={ <ContactPage /> } />
       <Route path="/manage-jobs" element={ <ManageJobsPage /> } />
-      <Route path="/recruiter-applications" element={ <ApplicationsPage /> } />
+      <Route path="/recruiter-applications" element={ <ApplicationPage /> } />
+      <Route path="/recruiter-dashboard-page" element={ <RecruiterDashboardPage /> } />
     </Routes>
   );
 }

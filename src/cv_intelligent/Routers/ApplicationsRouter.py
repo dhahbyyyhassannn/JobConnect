@@ -10,7 +10,6 @@ from ..services.llm_services import analyze_match_with_llm
 from ..schemas.ApplicationsSchema import ApplicationCreate, ApplicationOut
 router = APIRouter(prefix="/applications", tags=["Applications"])
 
-    
 
 @router.post('/applicationCreate', response_model=ApplicationOut)
 def createApplication(
@@ -30,11 +29,20 @@ def createApplication(
 
 
 
+@router.get('/getApplicantsByAppId')
+def getApplicantsByAppId(
+    application_id: int,
+    db: Session = Depends(get_db)
+):
+    applicants = db.query(Application.user_id).filter(Application.application_id == application_id).all()
+    return applicants
 
-@router.get('/user/{user_id}')
-def getApplicationsByUserId(user_id: int, 
+
+
+@router.get('/recruiter/{recruiter_id}')
+def getApplicationsByRecruiterId(recruiter_id: int, 
     db: Session = Depends(get_db)):
-    applications = db.query(Application).filter(Application.user_id == user_id).all()
+    applications = db.query(Application).filter(Application.recruiter_id == recruiter_id).all()
     return applications
 
 

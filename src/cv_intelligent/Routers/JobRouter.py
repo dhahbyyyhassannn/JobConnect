@@ -86,14 +86,14 @@ def create_bookmark(
 
 
 
-@router.get("/getJobsById/", response_model=list[schemas.JobOfferOut])
-def jobs_by_user_id(
-    user_id: int,
+@router.get("/getJobsByRecruiterId/", response_model=list[schemas.JobOfferOut])
+def jobs_by_recruiter_id(
+    recruiter_id: int,
     db: Session = Depends(get_db),
 ):
     return (
         db.query(models.JobOffer)
-        .filter(models.JobOffer.recruiter_id == user_id)
+        .filter(models.JobOffer.recruiter_id == recruiter_id)
         .order_by(models.JobOffer.created_at.desc())
         .all()
     )

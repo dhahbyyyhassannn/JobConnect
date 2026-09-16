@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getJobsById } from "../API/JobAPI"
+import { getJobsByRecruiterId } from "../API/JobAPI"
 import ManageJobCard from '../Components/Cards/ManageJobCard';
 import { getCurrentUser } from '../API/AuthAPI';
 import { deleteJob } from '../API/JobAPI';
@@ -21,7 +21,7 @@ export default function ManageJobs() {
     useEffect(() => {
         if (!user?.user_id) return;
 
-        getJobsById(user.user_id)
+        getJobsByRecruiterId(user.user_id)
         .then(res => setJobs(res?.data || []))
         .catch(err => console.error(err));
     }, [user?.user_id])

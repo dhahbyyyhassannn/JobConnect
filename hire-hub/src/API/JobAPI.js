@@ -46,14 +46,14 @@ export const getJobs = async () => {
     }
 }
 
-export const getJobsById = (user_id) => {
-    if (!user_id) {
+export const getJobsByRecruiterId = (recruiter_id) => {
+    if (!recruiter_id) {
         return Promise.reject(new Error('A user id is required to fetch jobs.'));
     }
 
     const token = localStorage.getItem('token');
-    return axios.get(`http://localhost:8000/job/getJobsById/`, {
-        params: { user_id },
+    return axios.get(`http://localhost:8000/job/getJobsByRecruiterId/`, {
+        params: { recruiter_id },
         headers: { Authorization: `Bearer ${token}` }
     });
 }

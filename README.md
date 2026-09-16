@@ -91,11 +91,22 @@ npm run build
 The fake-data seed creates 1 admin, 5 recruiters, 8 users, 25 job offers
 (5 per recruiter), and 3 applications per job:
 
-| Role | Email | Password |
-| --- | --- | --- |
-| Admin | `admin@fake.cv-intelligent.local` | `Admin123!` |
-| Recruiters | `*@fake.cv-intelligent.local` | `Recruiter123!` |
-| Users | `*@fake.cv-intelligent.local` | `User123!` |
+| Name | Role | Email | Password |
+| --- | --- | --- | --- |
+| Alice Admin | Admin | `admin@fake.cv-intelligent.local` | `Admin123!` |
+| Rami Recruiter | Recruiter | `recruiter@fake.cv-intelligent.local` | `Recruiter123!` |
+| Nadia Recruiter | Recruiter | `nadia.recruiter@fake.cv-intelligent.local` | `Recruiter123!` |
+| Karim Recruiter | Recruiter | `karim.recruiter@fake.cv-intelligent.local` | `Recruiter123!` |
+| Meriem Recruiter | Recruiter | `meriem.recruiter@fake.cv-intelligent.local` | `Recruiter123!` |
+| Youssef Recruiter | Recruiter | `youssef.recruiter@fake.cv-intelligent.local` | `Recruiter123!` |
+| Sara User | User | `user@fake.cv-intelligent.local` | `User123!` |
+| Amine User | User | `amine.user@fake.cv-intelligent.local` | `User123!` |
+| Ines User | User | `ines.user@fake.cv-intelligent.local` | `User123!` |
+| Hatem User | User | `hatem.user@fake.cv-intelligent.local` | `User123!` |
+| Maya User | User | `maya.user@fake.cv-intelligent.local` | `User123!` |
+| Omar User | User | `omar.user@fake.cv-intelligent.local` | `User123!` |
+| Leila User | User | `leila.user@fake.cv-intelligent.local` | `User123!` |
+| Walid User | User | `walid.user@fake.cv-intelligent.local` | `User123!` |
 
 Change or remove these credentials before using the project outside local development.
 

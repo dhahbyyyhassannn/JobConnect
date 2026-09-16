@@ -11,9 +11,9 @@ export const ApplicationReview = async (application_id) => {
     return response;
 }
 
-export const getApplicationsByUserId = (user_id) => {
+export const getApplicationsByRecruiterId = (recruiter_id) => {
     const token = localStorage.getItem('token');
-    const response = axios.get(`http://localhost:8000/applications/user/${user_id}`, {
+    const response = axios.get(`http://localhost:8000/applications/recruiter/${recruiter_id}`, {
         headers: { Authorization: `Bearer ${token}` }
     })
     return response;
@@ -32,3 +32,11 @@ export const createApplication = (user_id, cv_id, job_offer_id, recruiter_id) =>
     )
     return response;
 }
+
+export const getApplicantsByAppId = (application_id) => {
+    const response = axios.get('http://localhost:8000/applications/getApplicantsByAppId' , {
+        application_id
+    })
+    return response 
+}
+

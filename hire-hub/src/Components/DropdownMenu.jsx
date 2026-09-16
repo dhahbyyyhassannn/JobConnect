@@ -41,7 +41,7 @@ export default function DropdownMenu() {
                 <MenuLink linkPath={ "/edit-profil" } bootstrapIcon={ "bi bi-pencil-square" } linkName={ "edit profile" } />
               </li>
               <li>
-                <MenuLink linkPath={ "/recruiter-dashboard" } bootstrapIcon={ "bi bi-speedometer2" } linkName={ "dashboard" } />
+                <MenuLink linkPath={ "/recruiter-dashboard-page" } bootstrapIcon={ "bi bi-speedometer2" } linkName={ "dashboard" } />
               </li>
               <li>
                 <MenuLink linkPath={ "/add-job" } bootstrapIcon={ "bi bi-plus-square" } linkName={ "add a job" } />

@@ -1,0 +1,30 @@
+.recruiter-dashboard-link-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 150px;
+	padding: 12px 14px;
+	border: 1px solid transparent;
+	border-radius: 10px;
+	color: #536B82;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.recruiter-dashboard-link-container:hover {
+	border-color: #B9D3E3;
+	background-color: #ECF3F8;
+	color: #05437A;
+}
+
+.recruiter-dashboard-link-container svg {
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+}
+
+.recruiter-dashboard-link-container p {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 700;
+}
