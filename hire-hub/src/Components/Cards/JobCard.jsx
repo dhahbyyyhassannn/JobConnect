@@ -5,7 +5,7 @@ import { getCurrentUser } from '../../API/AuthAPI';
 import { createApplication } from '../../API/ApplicationAPI';
 import { getRequirementsByJobId } from '../../API/RequirementAPI';
 import { getCvByUserId } from '../../API/CVAPI';
-
+import { addBookmark } from '../../API/BookmarksAPI';
 
 export default function JobCard({ job }) {
 
@@ -67,13 +67,36 @@ export default function JobCard({ job }) {
         job.title && job.description && job.location && category && requirements.length > 0
     )
 
+    const [bookmarkMessage, setBookmarkMessage] = useState('')
+    const [isBookmarked, setIsBookmarked] = useState(false)
+    const handleBookmark = async () => {
+        if (!user?.user_id) {
+            setBookmarkMessage('unable to bookmark, missing user');
+        }
+        if (!job?.job_offer_id) {
+            setBookmarkMessage('unable to bookmark, missing job');
+        }
+
+        try {
+            await(addBookmark(job.job_offer_id));
+            setIsBookmarked(true)
+            setBookmarkMessage('job bookmarked successfully.');
+        }
+        catch (err) {
+            console.error('failed to bookmark: ', err)
+            setBookmarkMessage(err?.response?.data?.detail || 'bookmark failed. Please try again')
+        }
+    }
+
     return (
         <>
             <div className="job-card-container">
                 <div className="job-card-header">
                     <div className="job-card-header-top">
                         <h3 className="job-title">{job.title}</h3>
-                        <Bookmark className="bookmark-icon" />
+                        <Bookmark className={`bookmark-icon ${isBookmarked ? 'bookmarked' : ''}`}
+                            onClick={handleBookmark}
+                        />
                     </div>
                     <div className="job-company">
                         {job.job_category || job.category || 'Category not specified'}

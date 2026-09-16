@@ -47,3 +47,4 @@ export const logIn = (email, password) => {
 export const logout = () => {
   localStorage.removeItem('token');
 };
+

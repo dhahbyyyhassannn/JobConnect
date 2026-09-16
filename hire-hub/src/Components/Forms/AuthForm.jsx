@@ -5,8 +5,10 @@ import { Mail } from 'lucide-react';
 import { Lock } from 'lucide-react';
 import TextInputField from '../Inputs/TextInputField';
 import AuthPageButton from '../Buttons/AuthPageButton';
-import { register, logIn } from '../../API/AuthAPI';
+import { register, logIn, googleLogin } from '../../API/AuthAPI';
+import { GoogleLogin } from '@react-oauth/google';
 import './AuthForm.css'
+
 
 
 export default function AuthForm() {
@@ -220,11 +222,23 @@ export default function AuthForm() {
                 </div>
             </div>
             <div className='o-auth-2-container'>
-                <div className='o-auth-2-link-container'>
-                    Google
-                </div>
-                <div className='o-auth-2-link-container'>
-                    LinkedIn
+                <div className='o-auth-2-google-wrapper'>
+                    <GoogleLogin
+                        size='large'
+                        onSuccess={async (credentialResponse) => {
+                            try {
+                                const response = await googleLogin(credentialResponse.credential);
+                                const appToken = response.data?.token || response.data?.access_token;
+                                if (appToken) {
+                                    localStorage.setItem('token', appToken);
+                                    navigate('/');
+                                }
+                            } catch (err) {
+                                setError('Google login failed.');
+                            }
+                        }}
+                        onError={() => setError('Google login failed.')}
+                    />
                 </div>
             </div>
         </div>
