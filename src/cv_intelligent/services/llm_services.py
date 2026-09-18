@@ -3,76 +3,60 @@ from ollama import chat
 
 MODEL_NAME = "llama3.2"
 
-EXTRACTION_PROMPT = """You are a CV parsing assistant. Extract the following structured data from the CV text below and return ONLY valid JSON, no explanation, no markdown formatting.
-
-Schema:
-{{
-  "name": string,
-  "email": string,
-  "phone": string,
-  "skills": [string],
-  "experience": [{{"company": string, "title": string, "start_date": string, "end_date": string, "description": string}}]
-}}
-
-CV text:
-\"\"\"
-{cv_text}
-\"\"\"
-
-JSON:
-"""
-
 
 def analyze_match_with_llm(cv_text: str, job_text: str):
+
     prompt = f"""
-    You are an AI recruitment assistant.
+Tu es un assistant spécialisé dans le recrutement.
 
-    Your task is to compare a candidate CV with a job offer.
+Ton objectif est de déterminer si le candidat correspond à une offre d'emploi.
 
-    Analyze:
+IMPORTANT :
+1. Commence par analyser et comprendre l'OFFRE D'EMPLOI.
+2. Identifie les compétences, expériences, formations et exigences demandées.
+3. Ensuite, analyse le CV du candidat.
+4. Compare le CV avec les exigences de l'offre.
+5. Ne jamais inventer une information qui n'existe pas dans le CV.
+6. Sois objectif.
 
-    1. Technical skills
-    2. Work experience
-    3. Education
-    4. Job requirements
-    5. Relevant projects
+DONNEES À ANALYSER :
 
-    Do not invent information that is not present in the CV.
+OFFRE D'EMPLOI :
+{job_text}
 
-    Give a matching score between 0 and 100.
+CV DU CANDIDAT :
+{cv_text}
 
-    Rules:
-    - 80-100: Strong match
-    - 60-79: Good match
-    - 40-59: Partial match
-    - 0-39: Poor match
-    - Set "matched" to true if the score is 60 or higher.
-    - Only consider information explicitly present in the CV.
-    - Be objective.
+Retourne UNIQUEMENT un JSON valide, sans markdown et sans explication supplémentaire.
 
-    Return ONLY valid JSON in this format:
+Format obligatoire :
 
-    {{
-        "score": 0,
-        "matched": false,
-        "matching_skills": [],
-        "missing_requirements": [],
-        "explanation": ""
-    }}
+{{
+    "score": 0,
+    "matched": false,
+    "matching_skills": [],
+    "missing_requirements": [],
+    "matching_experience": [],
+    "matching_education": [],
+    "explanation": ""
+}}
 
-    JOB OFFER:
-    {job_text}
+Règles du score :
 
-    CANDIDATE CV:
-    {cv_text}
-    """
+80-100 = Très bonne correspondance
+60-79 = Bonne correspondance
+40-59 = Correspondance partielle
+0-39 = Faible correspondance
+
+"matched" doit être true si le score est supérieur ou égal à 60.
+"""
 
     response = chat(
-        model="llama3.2",
+        model=MODEL_NAME,
         messages=[
             {
                 "role": "system",
-                "content": "You are an expert recruitment assistant."
+                "content": "Tu es un expert en analyse de CV et d'offres d'emploi."
             },
             {
                 "role": "user",

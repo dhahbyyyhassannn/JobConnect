@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { getApplicationsByRecruiterId } from "../../API/ApplicationAPI"
+import { ApplicationReview, getApplicationsByRecruiterId } from "../../API/ApplicationAPI"
 import { getUserById } from "../../API/UserAPI"
 import { getCvByUserId } from "../../API/CVAPI"
 import { X } from "lucide-react"
@@ -72,7 +72,28 @@ export default function ApplicantsDialog({ app, recruiterId, onClose }) {
     const [isLoading, setIsLoading] = useState(true)
     const [loadError, setLoadError] = useState('')
     const [selectedApplicant, setSelectedApplicant] = useState(null)
+    const [analysisById, setAnalysisById] = useState({})
+    const [analyzingId, setAnalyzingId] = useState(null)
     const cvDialogRef = useRef(null)
+
+    const handleAnalyze = async (applicant) => {
+        const applicationId = applicant?.application_id || applicant?.id
+        if (!applicationId) return
+
+        setAnalyzingId(applicationId)
+        try {
+            const response = await ApplicationReview(applicationId)
+            setAnalysisById(previous => ({ ...previous, [applicationId]: response?.data }))
+        } catch (error) {
+            console.error('Failed to analyze application:', error)
+            setAnalysisById(previous => ({
+                ...previous,
+                [applicationId]: { error: 'CV analysis failed. Please try again.' }
+            }))
+        } finally {
+            setAnalyzingId(null)
+        }
+    }
 
 
     useEffect(() => {
@@ -129,7 +150,7 @@ export default function ApplicantsDialog({ app, recruiterId, onClose }) {
                         : applicants.length === 0 ? <p className="applicant-dialog-state">There are no applicants for this job.</p>
                         :
                         applicants.map(applicant => (
-                            <div className="applicant-row" key={applicant?.user_id}>
+                            <div className="applicant-row" key={applicant?.application_id || applicant?.id || applicant?.user_id}>
                                 <Applicant applicant={applicant} />
                                 <div className="applicant-actions">
                                     <button type="button" className="applicant-secondary-button" onClick={() => {
@@ -137,7 +158,26 @@ export default function ApplicantsDialog({ app, recruiterId, onClose }) {
                                     }}>
                                         See their CV
                                     </button>
-                                    <button type="button" className="applicant-primary-button">Analyze their CV</button>
+                                    <button
+                                        type="button"
+                                        className="applicant-primary-button"
+                                        onClick={() => handleAnalyze(applicant)}
+                                        disabled={analyzingId === (applicant?.application_id || applicant?.id)}
+                                    >
+                                        {analyzingId === (applicant?.application_id || applicant?.id) ? 'Analyzing CV...' : 'Analyze their CV'}
+                                    </button>
+                                    {analysisById[applicant?.application_id || applicant?.id] && (
+                                        <div className={`applicant-analysis ${analysisById[applicant?.application_id || applicant?.id].error ? 'applicant-dialog-error' : ''}`}>
+                                            {analysisById[applicant?.application_id || applicant?.id].error ? analysisById[applicant?.application_id || applicant?.id].error : (
+                                                <>
+                                                    <strong>Score: {analysisById[applicant?.application_id || applicant?.id].score ?? 'Not available'}</strong>
+                                                    {analysisById[applicant?.application_id || applicant?.id].explanation && <p>{analysisById[applicant?.application_id || applicant?.id].explanation}</p>}
+                                                    {analysisById[applicant?.application_id || applicant?.id].matching_skills?.length > 0 && <p><strong>Matching skills:</strong> {analysisById[applicant?.application_id || applicant?.id].matching_skills.join(', ')}</p>}
+                                                    {analysisById[applicant?.application_id || applicant?.id].missing_requirements?.length > 0 && <p><strong>Missing requirements:</strong> {analysisById[applicant?.application_id || applicant?.id].missing_requirements.join(', ')}</p>}
+                                                </>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))

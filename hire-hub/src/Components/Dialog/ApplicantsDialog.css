@@ -98,8 +98,10 @@
 
 .applicant-actions {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-end;
+    align-items: flex-end;
     gap: 9px;
 }
 
@@ -134,6 +136,27 @@
     border-color: #05437A;
     background: #FFFFFF;
     transform: translateY(-1px);
+}
+
+.applicant-primary-button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.applicant-analysis {
+    width: min(100%, 360px);
+    padding: 12px;
+    border: 1px solid #DDE7F0;
+    border-radius: 9px;
+    background: #F7FAFC;
+    color: #536B82;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.applicant-analysis p {
+    margin: 6px 0 0;
 }
 
 .applicant-dialog-state {
@@ -182,6 +205,7 @@
 
     .applicant-actions {
         justify-content: stretch;
+        align-items: stretch;
     }
 
     .applicant-primary-button,
